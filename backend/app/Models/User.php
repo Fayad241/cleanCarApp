@@ -54,6 +54,22 @@ class User extends Authenticatable
         ];
     }
 
+    // Relations
+    public function vehicules()
+    {
+        return $this->hasMany(Vehicule::class);
+    }
+
+    public function reservations()
+    {
+        return $this->hasMany(Reservation::class);
+    }
+
+    public function loyaltyTransactions()
+    {
+        return $this->hasMany(LoyaltyTransaction::class);
+    }
+
     // JWT Methods
     public function getJWTIdentifier()
     {
