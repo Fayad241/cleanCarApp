@@ -15,7 +15,7 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->string('name');
             $table->text('description')->nullable();
-            $table->enum('vehicule_type', ['car', 'motorcycle']);
+            $table->enum('vehicule_type', ['car', 'motorcycle', 'truck']);
             $table->boolean('is_active')->default(true);
             $table->boolean('is_popular')->default(false);
             $table->integer('order')->default(0);
