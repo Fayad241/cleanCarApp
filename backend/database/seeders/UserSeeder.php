@@ -17,9 +17,9 @@ class UserSeeder extends Seeder
         // Admin
         User::create([
             'first_name' => 'Admin',
-            'last_name' => 'System',
-            'phone' => '+2290157967900',
-            'email' => 'admin@cleancar.com',
+            'last_name' => 'Système',
+            'phone' => '+22990111111',
+            'email' => 'admin@cleancar.bj',
             'password' => Hash::make('password'),
             'role' => 'admin',
             'phone_verified_at' => now(),
@@ -28,10 +28,10 @@ class UserSeeder extends Seeder
 
         // Manager
         User::create([
-            'first_name' => 'Amadou',
-            'last_name' => 'Diallo',
-            'phone' => '+2290190222222',
-            'email' => 'manager@cleancar.com',
+            'first_name' => 'Rodrigue',
+            'last_name' => 'Ahouandjinou',
+            'phone' => '+22990222222',
+            'email' => 'manager@cleancar.bj',
             'password' => Hash::make('password'),
             'role' => 'manager',
             'phone_verified_at' => now(),
@@ -40,10 +40,10 @@ class UserSeeder extends Seeder
 
         // Employee
         User::create([
-            'first_name' => 'Moussa',
-            'last_name' => 'Jean',
-            'phone' => '+2290145333333',
-            'email' => 'employee@cleancar.com',
+            'first_name' => 'Yvette',
+            'last_name' => 'Dossou',
+            'phone' => '+22990333333',
+            'email' => 'employee@cleancar.bj',
             'password' => Hash::make('password'),
             'role' => 'employee',
             'phone_verified_at' => now(),
@@ -51,10 +51,10 @@ class UserSeeder extends Seeder
 
         // Clients
         User::create([
-            'first_name' => 'Fatou',
-            'last_name' => 'Badarou',
-            'phone' => '+2290196444444',
-            'email' => 'fatou@example.com',
+            'first_name' => 'Nadège',
+            'last_name' => 'Kpomassè',
+            'phone' => '+22990444444',
+            'email' => 'nadege@example.bj',
             'password' => Hash::make('password'),
             'role' => 'client',
             'loyalty_points' => 450,
@@ -62,10 +62,10 @@ class UserSeeder extends Seeder
         ]);
 
         User::create([
-            'first_name' => 'Jean',
-            'last_name' => 'Sagna',
-            'phone' => '+2290196555555',
-            'email' => 'jean@example.com',
+            'first_name' => 'Hermann',
+            'last_name' => 'Houndonougbo',
+            'phone' => '+22990555555',
+            'email' => 'hermann@example.bj',
             'password' => Hash::make('password'),
             'role' => 'client',
             'loyalty_points' => 820,

@@ -14,40 +14,40 @@ class VehiculeSeeder extends Seeder
      */
     public function run(): void
     {
-        $fatou = User::where('phone', '+2290196444444')->first();
-        $jean = User::where('phone', '+2290196555555')->first();
+        $nadege = User::where('phone', '+22990444444')->first();
+        $hermann = User::where('phone', '+22990555555')->first();
 
-        // Véhicules Fatou
+        // Véhicules Nadège
         Vehicule::create([
-            'user_id' => $fatou->id,
+            'user_id' => $nadege->id,
             'type' => 'car',
             'brand' => 'Toyota',
-            'model' => 'Yaris',
-            'size' => 'small',
-            'color' => 'Gris',
-            'plate_number' => 'CT 1234 AB',
+            'model' => 'Corolla',
+            'size' => 'medium',
+            'color' => 'Blanc',
+            'plate_number' => 'BJ 1234 AB',
             'is_default' => true,
         ]);
 
-        // Véhicules Jean
+        // Véhicules Hermann
         Vehicule::create([
-            'user_id' => $jean->id,
+            'user_id' => $hermann->id,
             'type' => 'car',
             'brand' => 'Mercedes',
             'model' => 'C200',
             'size' => 'medium',
             'color' => 'Noir',
-            'plate_number' => 'CT 5678 CD',
+            'plate_number' => 'BJ 5678 CD',
             'is_default' => true,
         ]);
 
         Vehicule::create([
-            'user_id' => $jean->id,
+            'user_id' => $hermann->id,
             'type' => 'car',
-            'brand' => 'Range Rover',
-            'model' => 'Sport',
+            'brand' => 'Toyota',
+            'model' => 'Land Cruiser',
             'size' => 'xlarge',
-            'color' => 'Blanc',
+            'color' => 'Gris',
             'plate_number' => null,
             'is_default' => false,
         ]);
