@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('vehicules', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->foreignUuid('user_id')->constrained()->onDelete('cascade');
-            $table->enum('type', ['car', 'motorcycle']);
+            $table->enum('type', ['car', 'motorcycle', 'truck']);
             $table->string('brand');
             $table->string('model');
             $table->enum('size', ['small', 'medium', 'large', 'xlarge', 'motorcycle']);
