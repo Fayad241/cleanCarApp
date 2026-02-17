@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use App\Contracts\SmsServiceInterface;
+use App\Services\Sms\MockSmsService;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -11,7 +13,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        // Lier le Service SMS
+        $this->app->bind(SmsServiceInterface::class, function () {
+            // En dev → Mock
+            // En prod → TwilioSmsService (à créer plus tard)
+            return new MockSmsService();
+        });
     }
 
     /**
