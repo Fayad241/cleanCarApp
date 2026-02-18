@@ -37,12 +37,12 @@ class StationSettingSeeder extends Seeder
             [
                 'key' => 'station_info',
                 'value' => [
-                    'name' => 'Clean Car Station',
-                    'address' => 'Rue 10, Contnou, Benin',
-                    'phone' => '+229 01 XX XX XX XX',
-                    'email' => 'contact@cleancar.com',
-                    'latitude' => 14.7167,
-                    'longitude' => -17.4677,
+                    'name' => 'Clean Car Pro',
+                    'address' => 'Avenue 123, Cotonou, Bénin',
+                    'phone' => '+229 01 57 XX XX XX',
+                    'email' => 'contact@cleancar.bj',
+                    'latitude' => 6.3703,
+                    'longitude' => 2.3912,
                 ],
             ],
             [
