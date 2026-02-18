@@ -14,7 +14,7 @@ class AppServiceProvider extends ServiceProvider
     public function register(): void
     {
         // Lier le Service SMS
-        $this->app->bind(SmsServiceInterface::class, function () {
+        $this->app->singleton(SmsServiceInterface::class, function () {
             // En dev → Mock
             // En prod → TwilioSmsService (à créer plus tard)
             return new MockSmsService();
