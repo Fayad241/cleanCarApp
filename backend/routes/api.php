@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\ServiceController;
+use App\Http\Controllers\Api\SlotController;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -21,6 +22,9 @@ Route::prefix('auth')->group(function () {
 // Services (publique)
 Route::get('/services', [ServiceController::class, 'index']);
 Route::get('/services/{id}', [ServiceController::class, 'show']);
+
+// Créneaux disponibles (publique)
+Route::get('/available-slots', [SlotController::class, 'available']);
 
 // Routes protégées (avec auth JWT)
 Route::middleware('auth:api')->group(function () {
