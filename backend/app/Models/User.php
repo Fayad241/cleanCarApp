@@ -6,11 +6,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use Tymon\JWTAuth\Contracts\JWTSubject;
 
-class User extends Authenticatable
+class User extends Authenticatable implements JWTSubject
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, HasUuids;
 
     /**
      * The attributes that are mass assignable.
@@ -18,9 +20,15 @@ class User extends Authenticatable
      * @var list<string>
      */
     protected $fillable = [
-        'name',
+        'first_name',
+        'last_name',
+        'phone',
         'email',
         'password',
+        'role',
+        'loyalty_points',
+        'phone_verified_at',
+        'email_verified_at',
     ];
 
     /**
@@ -42,7 +50,36 @@ class User extends Authenticatable
     {
         return [
             'email_verified_at' => 'datetime',
+            'phone_verified_at' => 'datetime',
             'password' => 'hashed',
+            'loyalty_points' => 'integer',
         ];
+    }
+
+    // Relations
+    public function vehicules()
+    {
+        return $this->hasMany(Vehicule::class);
+    }
+
+    public function reservations()
+    {
+        return $this->hasMany(Reservation::class);
+    }
+
+    public function loyaltyTransactions()
+    {
+        return $this->hasMany(LoyaltyTransaction::class);
+    }
+
+    // JWT Methods
+    public function getJWTIdentifier()
+    {
+        return $this->getKey();
+    }
+
+    public function getJWTCustomClaims()
+    {
+        return [];
     }
 }
