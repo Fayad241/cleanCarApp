@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\ServiceController;
 use App\Http\Controllers\Api\SlotController;
 use App\Http\Controllers\Api\VehiculeController;
+use App\Http\Controllers\Api\ReservationController;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -43,5 +44,16 @@ Route::middleware('auth:api')->group(function () {
         Route::patch('/{id}', [VehiculeController::class, 'update']);
         Route::delete('/{id}', [VehiculeController::class, 'destroy']);
         Route::patch('/{id}/set-default', [VehiculeController::class, 'setDefault']);
+    });
+
+    // Réservations
+    Route::prefix('reservations')->group(function () {
+        Route::get('/', [ReservationController::class, 'index']);
+        Route::post('/', [ReservationController::class, 'store']);
+        Route::get('/{reservation}', [ReservationController::class, 'show']);
+        Route::patch('/{reservation}', [ReservationController::class, 'update']);
+        Route::delete('/{reservation}', [ReservationController::class, 'destroy']);
+        Route::patch('/{reservation}/status', [ReservationController::class, 'updateStatus'])
+            ->middleware('role:employee,manager,admin');
     });
 });
