@@ -15,7 +15,7 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->foreignUuid('reservation_id')->constrained()->onDelete('cascade');
             $table->decimal('amount', 10, 2);
-            $table->enum('method', ['stripe', 'wave', 'mobile_money', 'cash']);
+            $table->enum('method', ['stripe', 'fedapay', 'paystack','cash']);
             $table->enum('status', ['pending', 'completed', 'failed', 'refunded'])->default('pending');
             $table->string('transaction_id')->nullable();
             $table->json('metadata')->nullable();
