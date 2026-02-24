@@ -7,6 +7,9 @@ use App\Http\Controllers\Api\ServiceController;
 use App\Http\Controllers\Api\SlotController;
 use App\Http\Controllers\Api\VehiculeController;
 use App\Http\Controllers\Api\ReservationController;
+use App\Http\Controllers\Api\Admin\DashboardController;
+use App\Http\Controllers\Api\Admin\PlanningController;
+use App\Http\Controllers\Api\Admin\ClientController;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -56,4 +59,29 @@ Route::middleware('auth:api')->group(function () {
         Route::patch('/{reservation}/status', [ReservationController::class, 'updateStatus'])
             ->middleware('role:employee,manager,admin');
     });
+
 });
+
+
+Route::middleware(['auth:api', 'role:employee,manager,admin'])->prefix('admin')->group(function () {
+
+    // Dashboard
+    Route::prefix('dashboard')->group(function () {
+        Route::get('/', [DashboardController::class, 'index']);
+        Route::get('/revenue', [DashboardController::class, 'revenue']);
+        Route::get('/services', [DashboardController::class, 'services']);
+    });
+
+    // Planning
+    Route::prefix('planning')->group(function () {
+        Route::get('/', [PlanningController::class, 'index']);
+        Route::get('/week', [PlanningController::class, 'week']);
+        Route::post('/walk-in', [PlanningController::class, 'storeWalkIn']);
+    });
+
+    // Clients
+    Route::prefix('clients')->group(function () {
+        Route::get('/', [ClientController::class, 'index']);
+        Route::get('/{user}', [ClientController::class, 'show']);
+    });
+});   
