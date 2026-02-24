@@ -72,4 +72,11 @@ Route::middleware(['auth:api', 'role:employee,manager,admin'])->prefix('admin')-
         Route::get('/services', [DashboardController::class, 'services']);
     });
 
-});
+    // Planning
+    Route::prefix('planning')->group(function () {
+        Route::get('/', [PlanningController::class, 'index']);
+        Route::get('/week', [PlanningController::class, 'week']);
+        Route::post('/walk-in', [PlanningController::class, 'storeWalkIn']);
+    });
+
+});   
