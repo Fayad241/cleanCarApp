@@ -79,4 +79,9 @@ Route::middleware(['auth:api', 'role:employee,manager,admin'])->prefix('admin')-
         Route::post('/walk-in', [PlanningController::class, 'storeWalkIn']);
     });
 
+    // Clients
+    Route::prefix('clients')->group(function () {
+        Route::get('/', [ClientController::class, 'index']);
+        Route::get('/{user}', [ClientController::class, 'show']);
+    });
 });   
