@@ -10,6 +10,7 @@ use App\Http\Controllers\Api\ReservationController;
 use App\Http\Controllers\Api\Admin\DashboardController;
 use App\Http\Controllers\Api\Admin\PlanningController;
 use App\Http\Controllers\Api\Admin\ClientController;
+use App\Http\Controllers\Api\Admin\StationSettingController;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -84,4 +85,18 @@ Route::middleware(['auth:api', 'role:employee,manager,admin'])->prefix('admin')-
         Route::get('/', [ClientController::class, 'index']);
         Route::get('/{user}', [ClientController::class, 'show']);
     });
+
 });   
+
+Route::middleware(['auth:api', 'role:manager,admin'])->prefix('admin')->group(function () {
+   
+    // Paramètres station
+    Route::prefix('settings')->group(function () {
+        Route::get('/', [StationSettingController::class, 'index']);
+        Route::put('/opening-hours', [StationSettingController::class, 'updateOpeningHours']);
+        Route::put('/capacity', [StationSettingController::class, 'updateCapacity']);
+        Route::put('/station-info', [StationSettingController::class, 'updateStationInfo']);
+        Route::put('/late-policy', [StationSettingController::class, 'updateLatePolicy']);
+        Route::put('/loyalty-rules', [StationSettingController::class, 'updateLoyaltyRules']);
+    });
+});
