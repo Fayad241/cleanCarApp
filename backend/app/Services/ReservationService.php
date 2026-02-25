@@ -8,10 +8,14 @@ use App\Models\ServiceVehiculeDuration;
 use App\Models\StationSetting;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
+use App\Services\LoyaltyService;
 
 class ReservationService
 {
-    public function __construct(private SlotService $slotService) {}
+    public function __construct(
+        private SlotService $slotService,
+        private LoyaltyService $loyaltyService
+    ) {}
 
     /**
      * Générer un numéro unique WA12345
@@ -187,6 +191,21 @@ class ReservationService
         }
 
         $updates = ['status' => $newStatus];
+
+        if ($newStatus === 'completed') {
+            $reservation->update([
+                'status'       => 'completed',
+                'completed_at' => now(),
+                'payment_status' => $reservation->payment_method === 'cash' ? 'paid' : $reservation->payment_status,
+            ]);
+
+            // Attribuer les points si réservation en ligne (user réel)
+            if ($reservation->source === 'online' && $reservation->user) {
+                $this->loyaltyService->earnPoints($reservation->user, $reservation);
+            }
+
+            return $reservation;
+        }
 
         match ($newStatus) {
             'in_progress' => $updates['started_at'] = now(),

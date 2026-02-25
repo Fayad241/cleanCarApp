@@ -11,6 +11,7 @@ use App\Http\Controllers\Api\Admin\DashboardController;
 use App\Http\Controllers\Api\Admin\PlanningController;
 use App\Http\Controllers\Api\Admin\ClientController;
 use App\Http\Controllers\Api\Admin\StationSettingController;
+use App\Http\Controllers\Api\LoyaltyController;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -61,6 +62,13 @@ Route::middleware('auth:api')->group(function () {
             ->middleware('role:employee,manager,admin');
     });
 
+    // Loyauté
+    Route::prefix('loyalty')->group(function () {
+      Route::get('/summary', [LoyaltyController::class, 'summary']);
+      Route::get('/history', [LoyaltyController::class, 'history']);
+      Route::post('/redeem', [LoyaltyController::class, 'redeem']);
+    });
+
 });
 
 
@@ -86,13 +94,14 @@ Route::middleware(['auth:api', 'role:employee,manager,admin'])->prefix('admin')-
         Route::get('/{user}', [ClientController::class, 'show']);
     });
 
+    Route::get('/settings', [StationSettingController::class, 'index']);
+
 });   
 
 Route::middleware(['auth:api', 'role:manager,admin'])->prefix('admin')->group(function () {
    
     // Paramètres station
     Route::prefix('settings')->group(function () {
-        Route::get('/', [StationSettingController::class, 'index']);
         Route::put('/opening-hours', [StationSettingController::class, 'updateOpeningHours']);
         Route::put('/capacity', [StationSettingController::class, 'updateCapacity']);
         Route::put('/station-info', [StationSettingController::class, 'updateStationInfo']);
