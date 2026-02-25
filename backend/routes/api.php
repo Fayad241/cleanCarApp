@@ -12,6 +12,7 @@ use App\Http\Controllers\Api\Admin\PlanningController;
 use App\Http\Controllers\Api\Admin\ClientController;
 use App\Http\Controllers\Api\Admin\StationSettingController;
 use App\Http\Controllers\Api\LoyaltyController;
+use App\Http\Controllers\Api\Admin\AdminServiceController;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -107,5 +108,17 @@ Route::middleware(['auth:api', 'role:manager,admin'])->prefix('admin')->group(fu
         Route::put('/station-info', [StationSettingController::class, 'updateStationInfo']);
         Route::put('/late-policy', [StationSettingController::class, 'updateLatePolicy']);
         Route::put('/loyalty-rules', [StationSettingController::class, 'updateLoyaltyRules']);
+    });
+
+    // Services
+    Route::prefix('services')->group(function () {
+        Route::get('/', [AdminServiceController::class, 'index']);
+        Route::post('/', [AdminServiceController::class, 'store']);
+        Route::patch('/{service}', [AdminServiceController::class, 'update']);
+        Route::delete('/{service}', [AdminServiceController::class, 'destroy']);
+        Route::post('/{service}/restore', [AdminServiceController::class, 'restore']);
+        Route::post('/{service}/toggle-active', [AdminServiceController::class, 'toggleActive']);
+        Route::put('/{service}/pricing/{vehiculeSize}', [AdminServiceController::class, 'upsertPricing']);
+        Route::delete('/{service}/pricing/{vehiculeSize}', [AdminServiceController::class, 'destroyPricing']);
     });
 });
