@@ -1,68 +1,454 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;0,6..96,600;1,6..96,400&family=IBM+Plex+Mono:wght@300;400&family=Sora:wght@200;300;400;500&display=swap');
+
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
+  /* ─── Backgrounds (mi-dark mi-light) ─── */
+  --bg-primary:       #1a1f2e;      /* Bleu nuit profond mais pas trop sombre */
+  --bg-secondary:     #242a3c;      /* Gris-bleu élégant plus clair */
+  --bg-card:          #2c3348;      /* Bleu nuit clair pour cartes */
+  --bg-card-hover:    #353e56;      /* Plus lumineux au survol */
+  --bg-overlay:       linear-gradient(135deg, rgba(26, 31, 46, 0.95), rgba(44, 51, 72, 0.9));
+
+  /* ─── Vert Principal (couleur dominante) ─── */
+  --green-primary:    #3cb371;      /* Vert moyen lumineux (plus visible) */
+  --green-light:      #5fcd85;      /* Vert clair éclatant */
+  --green-deep:       #2e8b57;      /* Vert profond (conservé) */
+  --green-glow:       #1e3a2a;      /* Vert sombre pour glow */
+  --green-pale:       #9fd9b2;      /* Vert menthe doux mais visible */
+  --green-bright:     #4cd07d;      /* Vert vif pour accents */
+
+  /* ─── Accents qui matchent avec le vert (version hybride) ─── */
+  --accent-gold:      #e6b450;      /* Or chaud lumineux */
+  --accent-blue:      #3f9e8f;      /* Bleu-vert teal - harmonieux avec le vert */
+  --accent-purple:    #9d7fd1;      /* Violet lavande lumineux */
+  --accent-teal:      #3fa38c;      /* Vert-bleu (teal) élégant */
+  --accent-coral:     #ffa07a;      /* Corail doux pour contrastes */
+
+  /* ─── Synthwave Hybrid Palette ─── */
+  --synth-green:      #3cb371;      /* Vert principal */
+  --synth-green-light: #9fd9b2;     /* Vert clair */
+  --synth-green-dim:  #2e8b57;      /* Vert profond */
+
+  --synth-cyan:       #40a69a;      /* Cyan teal - plus proche du vert */
+  --synth-cyan-light: #9fd0c5;      /* Cyan très clair ajusté */
+
+  --synth-purple:     #9d7fd1;      /* Violet lavande */
+  --synth-purple-light: #d9c9ff;    /* Lavande très claire */
+
+  --synth-blue:       #3f9e8f;      /* Bleu-vert (teal) - match parfait avec le vert */
+  --synth-blue-light: #a3d0c5;      /* Bleu-vert très clair */
+
+  --synth-yellow:     #e6b450;      /* Or chaud */
+
+  /* ─── Gradients hybrides ─── */
+  --gradient-sunset:  linear-gradient(135deg, #2e8b57 0%, #3f9e8f 50%, #40a69a 100%);
+  --gradient-fresh:   linear-gradient(45deg, #2c3348, #3cb371, #3f9e8f, #2c3348);
+  --gradient-warm:    linear-gradient(90deg, #3cb371, #e6b450, #ffa07a);
+  --gradient-hybrid:  repeating-linear-gradient(45deg, rgba(60, 179, 113, 0.1) 0px, rgba(60, 179, 113, 0.1) 4px, transparent 4px, transparent 20px);
+
+  /* ─── Primary Accents (version hybride) ─── */
+  --gold-deep:        #2e8b57;      /* Vert profond */
+  --gold-primary:     #3cb371;      /* Vert principal */
+  --gold-light:       #5fcd85;      /* Vert clair */
+  --gold-pale:        #9fd9b2;      /* Vert pâle */
+  --gold-glow:        rgba(60, 179, 113, 0.2);
+  --gold-border:      rgba(60, 179, 113, 0.25);
+  --gold-gradient:    var(--gradient-fresh);
+
+  /* ─── Text (contraste optimal sur fond mi-dark) ─── */
+  --text-primary:     #ffffff;      /* Blanc pur - maximum de lisibilité */
+  --text-secondary:   #e0e6f0;      /* Blanc bleuté très clair */
+  --text-muted:       #b0c0d0;      /* Bleu-gris clair */
+  --text-faint:       #8a9bb0;      /* Gris-bleu moyen */
+
+  /* ─── Borders (visibles mais élégantes) ─── */
+  --border-subtle:    rgba(255, 255, 255, 0.08);
+  --border-light:     rgba(60, 179, 113, 0.2);
+  --border-gold:      rgba(60, 179, 113, 0.3);
+  --border-gold-bright: rgba(60, 179, 113, 0.5);
+
+  /* ─── Status (version hybride) ─── */
+  --success:          #3cb371;      /* Vert principal */
+  --warning:          #e6b450;      /* Or chaud */
+  --error:            #e88a8a;      /* Rouge adouci */
+  --info:             #3f9e8f;      /* Bleu-vert - harmonieux avec le vert */
+
+  /* ─── Shadows (ombres profondes mais naturelles) ─── */
+  --shadow-sm:        0 4px 12px rgba(0, 0, 0, 0.3);
+  --shadow-md:        0 12px 40px rgba(0, 0, 0, 0.4);
+  --shadow-lg:        0 24px 70px rgba(0, 0, 0, 0.5);
+  --shadow-gold:      0 8px 32px rgba(0, 0, 0, 0.5), 0 0 1px rgba(60, 179, 113, 0.3);
+
+  /* ─── Glow Effects (lumière équilibrée) ─── */
+  --glow-green:       0 0 20px rgba(60, 179, 113, 0.3), 0 0 40px rgba(60, 179, 113, 0.15);
+  --glow-soft:        0 10px 30px rgba(60, 179, 113, 0.2);
+  --glow-warm:        0 10px 30px rgba(230, 180, 80, 0.2);
+  --glow-subtle:      0 0 30px rgba(0, 0, 0, 0.3);
+
+  /* ─── Background Effects ─── */
+  --grid-size:        60px;
+  --grid-color:       rgba(60, 179, 113, 0.05);
+  --vignette:         radial-gradient(circle at center, transparent 60%, rgba(0, 0, 0, 0.2) 100%);
+  --highlight:        radial-gradient(circle at 50% 0%, rgba(60, 179, 113, 0.1), transparent 70%);
+  
+  /* ─── Typography (élégante) ─── */
+--font-display:     'Bodoni Moda', 'Cormorant Garamond', Georgia, serif;
+--font-body:        'Sora', 'DM Sans', sans-serif;
+--font-mono:        'IBM Plex Mono', 'Space Mono', monospace;
+
+  /* ─── Spacing ─── */
+  --section-py:       6rem;
+  --container-px:     1.5rem;
+  --container-max:    80rem;
+
+  /* ─── Radius (équilibrés) ─── */
+  --radius-sm:        6px;
+  --radius-md:        12px;
+  --radius-lg:        20px;
+  --radius-xl:        28px;
+  --radius-full:      9999px;
+
+  /* ─── Transitions (fluides) ─── */
+  --transition-fast:  300ms ease;
+  --transition-base:  500ms ease;
+  --transition-slow:  800ms ease;
+}
+
+/* ─── Animations Hybrides ─── */
+@keyframes pulse-hybrid {
+  0%, 100% { 
+    opacity: 0.9;
+    text-shadow: 0 0 10px rgba(60, 179, 113, 0.3);
+  }
+  50% { 
+    opacity: 1;
+    text-shadow: 0 0 20px rgba(60, 179, 113, 0.5);
+  }
+}
+
+@keyframes glow-move {
+  0% { opacity: 0.3; transform: translateX(-10px); }
+  50% { opacity: 0.6; transform: translateX(10px); }
+  100% { opacity: 0.3; transform: translateX(-10px); }
+}
+
+@keyframes shimmer-hybrid {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+@keyframes float-hybrid {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
+@keyframes gradient-flow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* ─── Classes d'ambiance Hybrides ─── */
+.hybrid-text {
+  animation: pulse-hybrid 3s ease-in-out infinite;
   font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  letter-spacing: 0.3px;
 }
 
-a {
+.hybrid-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-gold);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  backdrop-filter: blur(5px);
+  transition: all var(--transition-base);
+  position: relative;
+  overflow: hidden;
+}
+
+.hybrid-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--green-light), transparent);
+  opacity: 0;
+  transition: opacity var(--transition-base);
+}
+
+.hybrid-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg), var(--glow-green);
+  border-color: var(--border-gold-bright);
+}
+
+.hybrid-card:hover::before {
+  opacity: 1;
+}
+
+.hybrid-grid {
+  background-image: 
+    linear-gradient(var(--grid-color) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+  background-size: var(--grid-size) var(--grid-size);
+  position: relative;
+}
+
+.hybrid-grid::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--vignette);
+  pointer-events: none;
+}
+
+.hybrid-grid::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--highlight);
+  pointer-events: none;
+  mix-blend-mode: overlay;
+}
+
+.glass-hybrid {
+  background: rgba(44, 51, 72, 0.7);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--border-gold);
+  box-shadow: var(--shadow-md);
+}
+
+/* ─── Classes de texte Hybrides ─── */
+.text-gold {
+  background: linear-gradient(135deg, #3cb371, #9fd9b2);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
   font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
+  letter-spacing: 0.5px;
 }
 
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
-}
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
+.text-gold-shimmer {
+  background: linear-gradient(90deg, #3cb371, #9fd9b2, #4a8fc9, #3cb371);
+  background-size: 300% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer-hybrid 6s linear infinite;
   font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+.text-elegant {
+  font-family: var(--font-display);
+  font-weight: 400;
+  color: var(--text-primary);
+  line-height: 1.2;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* ─── Boutons Hybrides ─── */
+.hybrid-button {
+  background: var(--bg-card);
+  border: 1px solid var(--border-gold);
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  padding: 1rem 2.5rem;
+  border-radius: var(--radius-md);
+  transition: all var(--transition-base);
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+.hybrid-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(60, 179, 113, 0.2), transparent);
+  transition: left var(--transition-base);
+}
+
+.hybrid-button:hover {
+  border-color: var(--green-light);
+  color: var(--text-primary);
+  box-shadow: var(--glow-green);
+  transform: translateY(-2px);
+  background: var(--bg-card-hover);
+}
+
+.hybrid-button:hover::before {
+  left: 100%;
+}
+
+.hybrid-button-primary {
+  background: var(--green-primary);
+  border: none;
+  color: white;
+}
+
+.hybrid-button-primary:hover {
+  background: var(--green-light);
+  color: white;
+  box-shadow: var(--glow-green);
+}
+
+/* ─── Badges hybrides ─── */
+.badge {
+  display: inline-block;
+  padding: 0.3rem 1rem;
+  border-radius: var(--radius-full);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  transition: all var(--transition-fast);
+}
+
+.badge-green { background: rgba(60, 179, 113, 0.15); color: #9fd9b2; border: 1px solid rgba(60, 179, 113, 0.3); }
+.badge-gold { background: rgba(230, 180, 80, 0.15); color: #e6b450; border: 1px solid rgba(230, 180, 80, 0.3); }
+.badge-blue { background: rgba(74, 143, 201, 0.15); color: #a3c9f0; border: 1px solid rgba(74, 143, 201, 0.3); }
+.badge-purple { background: rgba(157, 127, 209, 0.15); color: #d9c9ff; border: 1px solid rgba(157, 127, 209, 0.3); }
+
+/* ─── Inputs hybrides ─── */
+.hybrid-input {
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: 0.8rem 1.2rem;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: var(--text-primary);
+  transition: all var(--transition-fast);
+  width: 100%;
+}
+
+.hybrid-input:focus {
+  outline: none;
+  border-color: var(--green-light);
+  box-shadow: 0 0 0 3px rgba(60, 179, 113, 0.2);
+}
+
+.hybrid-input::placeholder {
+  color: var(--text-faint);
+}
+
+/* ─── Séparateurs élégants ─── */
+.divider {
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--green-light), transparent);
+  width: 100px;
+  margin: 2rem auto;
+}
+
+.divider-vertical {
+  width: 2px;
+  height: 40px;
+  background: linear-gradient(180deg, transparent, var(--green-light), transparent);
+  margin: 0 auto;
+}
+
+/* ─── Effet de profondeur ─── */
+.depth {
+  position: relative;
+}
+
+.depth::after {
+  content: '';
+  position: absolute;
+  bottom: -15px;
+  left: 10%;
+  width: 80%;
+  height: 15px;
+  background: radial-gradient(ellipse at center, rgba(0,0,0,0.4) 0%, transparent 80%);
+  filter: blur(5px);
+  z-index: -1;
+}
+
+/* ─── Effet de lumière ─── */
+.light-glow {
+  position: relative;
+}
+
+.light-glow::before {
+  content: '';
+  position: absolute;
+  top: -20%;
+  left: -10%;
+  right: -10%;
+  bottom: -20%;
+  background: radial-gradient(circle at 30% 40%, rgba(60, 179, 113, 0.1), transparent 60%);
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* ─── Classes reveal pour mode hybride ─── */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity var(--transition-slow), transform var(--transition-slow);
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ─── Scrollbar hybride ─── */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+  border-radius: var(--radius-full);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--green-primary), var(--green-light));
+  border-radius: var(--radius-full);
+  border: 2px solid var(--bg-secondary);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--green-light);
+}
+
+/* ─── Effets spéciaux hybrides ─── */
+.floating {
+  animation: float-hybrid 3s ease-in-out infinite;
+}
+
+.pulsing {
+  animation: pulse-hybrid 3s ease-in-out infinite;
+}
+
+.glow-move {
+  position: relative;
+  overflow: hidden;
+}
+
+.glow-move::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  right: -50%;
+  bottom: -50%;
+  background: radial-gradient(circle at 30% 50%, rgba(60, 179, 113, 0.1), transparent 50%);
+  animation: glow-move 15s ease-in-out infinite;
+  pointer-events: none;
 }
