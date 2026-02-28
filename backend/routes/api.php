@@ -34,6 +34,12 @@ Route::get('/services/{id}', [ServiceController::class, 'show']);
 // Créneaux disponibles (publique)
 Route::get('/available-slots', [SlotController::class, 'available']);
 
+// Heures d'ouverture — Fermeture (publique)
+Route::get('/station/hours', function () {
+    $setting = \App\Models\StationSetting::where('key', 'opening_hours')->first();
+    return response()->json(['success' => true, 'data' => $setting?->value]);
+});
+
 // Routes protégées (avec auth JWT)
 Route::middleware('auth:api')->group(function () {
     Route::prefix('auth')->group(function () {
@@ -72,7 +78,7 @@ Route::middleware('auth:api')->group(function () {
 
 });
 
-
+// Routes protégées (auth JWT + role employee/manager/admin)
 Route::middleware(['auth:api', 'role:employee,manager,admin'])->prefix('admin')->group(function () {
 
     // Dashboard
@@ -99,6 +105,7 @@ Route::middleware(['auth:api', 'role:employee,manager,admin'])->prefix('admin')-
 
 });   
 
+// Routes protégées (auth JWT + role manager/admin)
 Route::middleware(['auth:api', 'role:manager,admin'])->prefix('admin')->group(function () {
    
     // Paramètres station
