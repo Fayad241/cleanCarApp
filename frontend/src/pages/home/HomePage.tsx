@@ -2,6 +2,7 @@ import Navbar from "../../components/layout/Navbar";
 import HeroSection from "./sections/HeroSection";
 import BookingSection from "./sections/BookingSection";
 import ServicesSection from "./sections/ServicesSection";
+import AboutSection from "./sections/AboutSection";
 import WhyUsSection from "./sections/WhyUsSection";
 import LoyaltySection from "./sections/LoyaltySection";
 import TestimonialsSection from "./sections/TestimonialsSection";
@@ -15,6 +16,7 @@ export default function HomePage() {
       <HeroSection />
       <BookingSection />
       <ServicesSection />
+      <AboutSection />
       <WhyUsSection />
       <LoyaltySection />
       <TestimonialsSection />
