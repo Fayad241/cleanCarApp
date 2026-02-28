@@ -4,6 +4,7 @@ import BookingSection from "./sections/BookingSection";
 import ServicesSection from "./sections/ServicesSection";
 import WhyUsSection from "./sections/WhyUsSection";
 import LoyaltySection from "./sections/LoyaltySection";
+import TestimonialsSection from "./sections/TestimonialsSection";
 import { HoursSection } from "./sections/HoursSection";
 import { Footer } from "../../components/layout/Footer";
 
@@ -16,6 +17,7 @@ export default function HomePage() {
       <ServicesSection />
       <WhyUsSection />
       <LoyaltySection />
+      <TestimonialsSection />
       <HoursSection />
       <Footer />
     </div>

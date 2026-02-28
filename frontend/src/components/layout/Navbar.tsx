@@ -164,6 +164,7 @@ export default function Navbar({ isAuthenticated = false }: NavbarProps) {
           backgroundColor: "var(--bg-card)",
           borderTop: "1px solid var(--border-gold)",
           backdropFilter: "blur(12px)",
+          marginTop: menuOpen ? "0.9rem" : "0",
         }}
       >
         <div

@@ -1,5 +1,5 @@
 @import "tailwindcss";
-@import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;0,6..96,600;1,6..96,400&family=IBM+Plex+Mono:wght@300;400&family=Sora:wght@200;300;400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@200;300;400;500&family=JetBrains+Mono:wght@300;400&display=swap');
 
 :root {
   /* ─── Backgrounds (mi-dark mi-light) ─── */
@@ -92,9 +92,10 @@
   --highlight:        radial-gradient(circle at 50% 0%, rgba(60, 179, 113, 0.1), transparent 70%);
   
   /* ─── Typography (élégante) ─── */
---font-display:     'Bodoni Moda', 'Cormorant Garamond', Georgia, serif;
---font-body:        'Sora', 'DM Sans', sans-serif;
---font-mono:        'IBM Plex Mono', 'Space Mono', monospace;
+  --font-display: 'Playfair Display', 'Cormorant Garamond', Georgia, serif;
+  --font-body: 'Inter', 'DM Sans', sans-serif;
+  --font-mono: 'JetBrains Mono', 'Space Mono', monospace; 
+
 
   /* ─── Spacing ─── */
   --section-py:       6rem;
